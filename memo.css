@@ -1,0 +1,14 @@
+body{
+
+    background-color: grey;
+}
+
+#cartes{
+display: flex;
+align-items: center;
+padding: 10em;
+margin-left: 40%;
+margin-right: 50%;
+border-radius: 15px;
+background-color: white;
+}

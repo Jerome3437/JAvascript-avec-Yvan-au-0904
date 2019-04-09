@@ -1,0 +1,25 @@
+body{
+  background-color: grey;
+}
+body section#tableau {
+  display: flex;
+  flex-flow: row wrap;
+}
+body section#tableau .colonne{/*Là c'est normal d'avoir un espace pour 
+                               spécifier que ce sont les éléments de la colonne que l'on modifie*/
+  width: 20%;
+  margin: 0 1%;
+  padding: 5px 1%;
+  border: 2px solid white;
+}
+
+/* l'Article représente une carte*/
+
+body > section > section > article {
+  background-color: white;
+  border: 3px solid salmon;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+

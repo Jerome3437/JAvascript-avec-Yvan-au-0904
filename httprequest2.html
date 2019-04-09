@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deuxième exo</title>
+</head>
+
+<body>
+
+    <h1>Bonjour 2</h1>
+    <div id="coucou2"></div>
+
+
+    <script>
+
+        const req = new XMLHttpRequest();
+
+        function maProgression(event) {
+
+            if (event.lengthComputable) {
+                console.log("Données totales : ", event.total);
+                console.log("Données reçues: ", event.loaded);
+            } else
+                console.log("Pas de données calculables");
+
+        }
+        req.onprogress = maProgression;
+
+        function monErreur(event) {
+            //Cette fonction sera appelée uniquement en cas d'erreur de la requête
+            //Il nous suffit d'indiquer l'erreur de la console 
+            console.log("Erreur", event.target.status);
+        }
+        req.onerror = monErreur;
+
+        function enCours(event) {
+            if (this.status === 200) {
+                console.log("Contenu", this.responseText);
+
+                //Injection du contenu dans notre div coucou
+
+                const coucou = document.getElementById("coucou2");
+                coucou.innerHTML = this.responseText;
+
+            } else {
+                console.log("statut actuel", this.status, this.statusText);
+            }
+        }
+        req.onload = enCours;
+
+        //Préparation de ma requête
+        req.open('POST', 'http://www.neore.fr/coucou.php', true);
+
+        //Définition d'un en-tête
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"
+        );
+        
+        //Exécution (envoi)
+        req.send("nom=Jerome");
+    </script>
+
+
+
+
+
+
+
+
+    </script>
+
+    </div>
+</body>
+
+</html>
