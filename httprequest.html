@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercice HTTP REQUEST</title>
+</head>
+
+<body>
+    <h1>Bonjour</h1>
+    <div id="coucou">
+
+    </div>
+</body>
+
+<script>
+
+    //Instanciation
+    const req = new XMLHttpRequest(); //on a instancié un objet XML 
+
+    function maProgression(event) {
+        //L'argument event va contenir deux propriétés intéressantes :
+        //event.loaded : nous indique la quantité d'octerts téléchargés.
+        //event.total : la quantité d'octets totale attendue.
+
+        if (event.lengthComputable) {
+            console.log("Données totales : ", event.total);
+            console.log("Données reçues: ", event.loaded);
+        } else
+            console.log("Pas de données calculables");
+
+    }
+    req.onprogress = maProgression;
+
+    function monErreur(event) {
+        //Cette fonction sera appelée uniquement en cas d'erreur de la requête
+        //Il nous suffit d'indiquer l'erreur de la console 
+        console.log("Erreur", event.target.status);
+    }
+    req.onerror = monErreur;
+
+    function enCours(event) {
+        if (this.status === 200) {
+            console.log("Contenu", this.responseText);
+
+            //Injection du contenu dans notre div coucou
+
+            const coucou = document.getElementById("coucou");
+            coucou.innerHTML= this.responseText;   
+
+        } else {
+            console.log("statut actuel", this.status, this.statusText);
+        }
+    }
+    req.onload = enCours;
+
+    //Préparation de ma requête
+    req.open('GET', 'http://www.neore.fr/fichier.html', true);
+
+    //Exécution (envoi)
+    req.send(null);
+</script>
